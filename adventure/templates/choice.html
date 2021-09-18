@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class=choices>
+        <div class="page1">
+            <div class=description> 
+                <h1>MAKE YOUR CHOICE {{choice_name}}</h1>
+                <h1 id=selected_choice></h1>
+            </div>
+        </div>
+        
+        <div class="divide"></div>
+        
+                <div class="page2">
+                    <form target="_blank" action="{% url 'choice' chunk_id choice_name %}" method="post">
+                        {% csrf_token %}
+                            
+                        {% for possibility in choicePossibilities %}
+                            
+                            <input type="radio" id="{{possibility.id}}" name="path" value={{possibility.optionName}} onclick="onClick(this)"/>
+                            <label for={{possibility.id}}>
+                                <img src="{% static possibility.imgPath|add:'.png' %}" id="image{{possibility.id}}" alt='{{possibility.optionName}}'>
+                            </label>
+                            <script>
+                                console.log("hi please")
+
+                            </script>
+                            <span id="fooBar{{possibility.id}}">&nbsp;</span>
+                        {% endfor %}
+
+
+                </div>
+                <input  type="submit" value="submit">
+            </form>
+     
+        <script>
+            function onClick(element){
+                document.getElementById("selected_choice").textContent = element.value;
+            }
+        </script>
+
+        <div class="book-cover"></div>
+    </div>
+{% endblock %}

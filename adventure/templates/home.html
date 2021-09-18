@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" href="{% static 'styling.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
+</head>
+<body class = "home">
+    <div class = "wrapper">
+        <a href="{% url 'crossroads' 1 %}" id="link">
+            <div class="bookcover">
+                <h1 id="title">A Hero's Journey</h1>
+                <img src="{% static 'book_cover.jpg' %}"/>
+            </div>
+        </a>
+        
+    </div>
+
+   
+    <div class="page">
+        <div class="start">
+            <p><strong><a href="{% url 'crossroads' 1 %}">A Choose-Your-Own-Path-Adventure by Anthony Buck, performed by the Stevens Dramatic Society.</a></strong></p>
+        </div>
+    </div>
+</body>
+</html>

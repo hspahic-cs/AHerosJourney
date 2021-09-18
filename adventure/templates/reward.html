@@ -1,0 +1,40 @@
+{% load static %}
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    </meta>
+    <link rel="stylesheet" href="{% static 'styling.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
+</head>
+
+<body class = "reward">
+    <div class="rewardwrapper">
+        {% if CPLReward or MRLReward %}
+            {% if CPLReward %} 
+            <a href = "https://www.youtube.com/watch?v=Gs069dndIYk">
+                <div class = "prize">
+                    <h1>You guessed the couples correctly!</h1>
+                </div>
+            </a>
+            {% endif %}
+            {% if MRLReward %}
+            <a href = "https://www.youtube.com/watch?v=MtN1YnoL46Q" >
+                <div class = "prize">
+                    <h1>You choose the correct moral!</h1>
+                </div>
+            </a>
+            {% endif %}
+            {% else %}
+            <a href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                <div class = "prize">
+                    <h1>Congrats you won something!</h1>
+                </div>
+            </a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

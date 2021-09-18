@@ -1,0 +1,15 @@
+{% load static %}
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'styling.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'styling.css' %}" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
+    </head>
+    <body class="base">
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

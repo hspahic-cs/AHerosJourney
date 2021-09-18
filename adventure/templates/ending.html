@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    </meta>
+    <link rel="stylesheet" href="{% static 'styling.css' %}" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@800&display=swap" rel="stylesheet">
+</head>
+
+<body class="home">
+    <div class="wrapper">
+        <a href = "https://drive.google.com/file/d/1es61VkBkIomhhIqiYBrqUqjH7moYQjdD/view?usp=sharing" style="text-decoration: none;">
+        <div class="bookcover" id="ending_cover">
+            <h1 id="ending">The End</h1>
+            <div class="page"></div>
+        </div>
+        </a>
+    </div>
+
+    <a href="{% url 'reward' %}">
+        <div class="prize" id = "link">
+            <h1>Did you get the reward...?</h1>
+        </div>
+    </a>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<header>
+    <div class="open-book">
+        <div class="video">
+            <figure>
+                <video id="currentVideo" controls poster="{% static filePaths.0.1 %}" autoplay onended="onEnded()">
+                    <source id="currentSource" src="{% static filePaths.0.0 %}" type="video/mp4">
+                    Video was unable to load
+                </video>
+            </figure>
+        </div>
+    
+        <div class="page1"></div>
+        <div class="divide"></div>
+        <div class="page2"></div>
+    </div>
+
+    <script>
+
+        var player = document.getElementById('currentVideo');
+        var mp4vid = document.getElementById('currentSource');
+        var filePaths = []
+        var filePathsStr = ("{{filePaths | safe}}")
+
+
+        // Converts Django filepaths variable to a usable javascript list 
+        function parsePaths(encryptedStr) {
+            let storage = [];
+
+            while (encryptedStr.indexOf("\'") !== -1) {
+                let firstOcc = encryptedStr.indexOf("\'");
+                let cutStr = encryptedStr.substring(firstOcc + 1).indexOf("\'") + firstOcc + 1;
+                storage.push(encryptedStr.substring(firstOcc + 1, cutStr));
+                encryptedStr = encryptedStr.substring(cutStr + 1);
+            }
+
+            storage = storage.reduce((acc, path, i) => {
+                if (i % 2 == 0) {
+                    acc.push([path]);
+                }
+                else {
+                    acc[acc.length - 1].push(path);
+                }
+                return acc
+            }, []);
+
+            return storage;
+        }
+
+        filePaths = parsePaths(filePathsStr);
+        let i = 1;
+
+        // Skips first video that already played
+        function onEnded() {
+            if (i < filePaths.length) {
+                player.setAttribute("poster", "/static/" + filePaths[i][1]);
+                mp4vid.setAttribute("src", "/static/" + filePaths[i][0]);
+                i++;
+                player.load();
+                player.play();
+            }
+
+            else {
+                document.getElementById('continue').setAttribute('style', "display: block;")
+            }
+        }
+    </script>
+
+    <div class="book-cover"></div>
+
+    <!-- Comment in display to appear after videos finished -->
+    <div class="continue" id="continue" style="display:none;">
+            {% if chunk_id == 13 %}
+            <p><a href="{% url 'ending' %}">Continue...?</a></p>
+            {% else %}
+                {% with counter=chunk_id|add:"1" %}
+                <p><a href="{% url 'choice' counter nextChoice %}">Continue...?</a></p>
+                {% endwith %}
+            {% endif %}
+    </div> 
+</header> 
+{% endblock %}
